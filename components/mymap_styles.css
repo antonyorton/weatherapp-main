@@ -1,0 +1,4 @@
+.mapboxgl-map {
+  background: url('images/starry-sky.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
