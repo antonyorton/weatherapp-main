@@ -21,7 +21,7 @@ export default async function MapPage() {
 
   return (
     <div className="bg-slate-200 text-justify rounded-xl">
-      <div className="p-2 bg-slate-100 rounded">
+      <div className="bg-slate-100 rounded">
         <MyMap citiesGeoJson={citiesGeoJson} allWeatherData={weatherData} mapbox_access_token={mapbox_access_token} className="rounded-lg" />
       </div>
     </div>

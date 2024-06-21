@@ -332,7 +332,7 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
 
   return (
     <div>
-      <div ref={mapContainer} className="h-full min-h-[220px] rounded-lg ">
+      <div ref={mapContainer} className="h-full min-h-96 rounded-lg ">
         <img src="/images/north-toggle.png" alt="North sign" style={{ zIndex: 1000, width: '35px', height: '35px' }} className="h-full absolute left-0 top-0 transform translate-x-4 translate-y-4 hover:opacity-75 cursor-pointer" onClick={() => flyToDefault()} />
       </div>
       {selectedCity ? <ChartGroup className="h-full min-h-[768px]" weather={allWeatherData[selectedCity]} /> : <p>Click on a city to see the recent weather ..</p>}
