@@ -144,7 +144,7 @@ export default function Chart({ data, weatherVariable, className, num_days = 5 }
   }
 
   return (
-    <div className=" my-2 p-2 mx-1 min-w-[200px] border-2 border-green-600 rounded-lg shadow-md">
+    <div className=" my-2 p-1 min-w-[210px] border-2 border-green-600 rounded-lg shadow-md">
       <Line data={chartData} options={options} />
     </div>
   )

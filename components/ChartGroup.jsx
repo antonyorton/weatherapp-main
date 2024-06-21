@@ -28,13 +28,13 @@ export default function ChartGroup({ weather }) {
   // const weather = await fetchWeather(city)
 
   return (
-    <div className="bg-white-500 text-justify mx-2 w-full">
+    <div className="bg-white-500 text-justify mx-1 w-full">
       <span className="flex flex-row justify-center text-slate-600 my-2">
-        <h1 className="flex text-m font-bold px-3">{`${cityData.name}, ${cityData.country}`}</h1>
-        <h2 className="py-1">{`${localTime} (local time)`}</h2>
+        <h1 className="flex text-m font-bold px-1">{`${cityData.name}, ${cityData.country}`}</h1>
+        <h2 className="py-0">{`${localTime} (local time)`}</h2>
       </span>
 
-      <div className="flex flex-col lg:flex-row justify-center">
+      <div className="flex flex-col justify-center">
         {/* <h2 className="px-4">Temperature</h2> */}
         <div className="flex-1">
           <Chart data={weather} weatherVariable="temp_c" num_days="7" />
