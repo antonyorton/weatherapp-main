@@ -205,11 +205,14 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
         case 'dusk':
           setLightingMode('noon')
           return
+        // case 'dawn':
+        //   setLightingMode('noon')
+        //   return
         case 'noon':
           setLightingMode('dusk')
           return
         default:
-          setLightingMode('noon')
+          setLightingMode('dusk')
           return
       }
     })
@@ -267,6 +270,12 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
             tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
             tileSize: 256,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          },
+          mapbox_dem: {
+            type: 'raster-dem',
+            url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+            tileSize: 512,
+            maxzoom: 14
           }
         },
         layers: [
@@ -399,6 +408,8 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
 
     //Restore the view state after the lighting style has loaded
     mymap.on('style.load', () => {
+      mymap.setTerrain({ source: 'mapbox_dem', exaggeration: 2 })
+
       mymap.flyTo({
         center: currentState.center,
         zoom: currentState.zoom,
