@@ -7,7 +7,7 @@ export default function HomePage() {
       <Link href="/map" className="text-blue-500 font-bold">
         Go to the map page{' '}
       </Link>
-      <p>This is a simple NextJS weather app using WeatherAPI and Mapbox</p>
+      <p>This is a NextJS weather app using WeatherAPI and Mapbox</p>
       <div>
         <img src="/images/himawari-latest.jpg" alt="" className="pt-2" />
       </div>

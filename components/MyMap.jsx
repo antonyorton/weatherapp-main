@@ -21,8 +21,8 @@ function getGibsTilePaths() {
 
   SatteliteUTCDate = SatteliteUTCDate.toISOString().split('T')[0]
   SatteliteUTCDate_previousDay = SatteliteUTCDate_previousDay.toISOString().split('T')[0]
-  console.log('SatteliteUTCDate:', SatteliteUTCDate)
-  console.log('SatteliteUTCDate_previousDay:', SatteliteUTCDate_previousDay)
+  // console.log('SatteliteUTCDate:', SatteliteUTCDate)
+  // console.log('SatteliteUTCDate_previousDay:', SatteliteUTCDate_previousDay)
 
   //TODO, see if we can get more up to date imagery (currently using the date in LA)
   const tilePath = 'wmts/epsg3857/best/' + 'VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/' + `${SatteliteUTCDate}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`
@@ -126,122 +126,196 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
   const mapContainer = useRef(null)
   const mapInstance = useRef(null)
   const [selectedCity, setSelectedCity] = useState(null)
+  const [lightingMode, setLightingMode] = useState('light') // Default to light mode
 
   //get the tilepaths for the current and previous day
   const { tilePath, tilePathPreviousDay } = getGibsTilePaths()
 
-  const style1 = 'mapbox://styles/mapbox/standard' // Use Mapbox's standard imagery
+  // const style1 = 'mapbox://styles/mapbox/standard' // Use Mapbox's standard imagery
 
-  const style2 = 'mapbox://styles/mapbox/streets-v11' // Use Mapbox's satellite imagery
+  // const style2 = 'mapbox://styles/mapbox/streets-v11' // Use Mapbox's satellite imagery
 
-  //NASA satellite imagery
-  const style3 = {
-    version: 8,
-    imports: [
-      {
-        id: 'basemap',
-        url: 'mapbox://styles/mapbox/standard',
-        //add configuration options
-        config: {
-          lightPreset: 'noon',
-          showPointOfInterestLabels: false
-        }
-      }
-    ],
-    sources: {
-      gibs: {
-        type: 'raster',
-        tiles: ['https://gibs-a.earthdata.nasa.gov/' + tilePathPreviousDay, 'https://gibs-b.earthdata.nasa.gov/' + tilePathPreviousDay, 'https://gibs-c.earthdata.nasa.gov/' + tilePathPreviousDay],
-        tileSize: 128
-      },
-      mapbox_streets: {
-        type: 'vector',
-        url: 'mapbox://mapbox.mapbox-streets-v8' // Mapbox Streets vector tile source
-      },
-      mapbox_satelitte: {
-        type: 'raster',
-        url: 'mapbox://styles/mapbox/satellite-v9' // Mapbox Satellite raster tile source
-      },
-      mapbox_streets_raster: {
-        type: 'raster',
-        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-        tileSize: 256,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }
-    },
-    layers: [
-      // {
-      //   id: 'background',
-      //   type: 'background',
-      //   paint: {
-      //     'background-color': 'grey',
-      //     'raster-opacity': 0.5
-      //   }
-      // },
-      // {
-      //   id: 'mapbox_streets_raster',
-      //   type: 'raster',
-      //   source: 'mapbox_streets_raster',
-      //   minzoom: 5,
-      //   maxzoom: 20,
-      //   paint: {
-      //     'raster-opacity': 1 // Add this line
-      //   }
-      // },
-      {
-        id: 'gibs',
-        type: 'raster',
-        source: 'gibs',
-        minzoom: 0,
-        maxzoom: 6,
-        paint: {
-          'raster-opacity': 1 // Add this line
-        }
-      },
+  // //NASA satellite imagery
+  // const style3 = {
+  //   version: 8,
+  //   imports: [
+  //     {
+  //       id: 'basemap',
+  //       url: 'mapbox://styles/mapbox/standard',
+  //       //add configuration options
+  //       config: {
+  //         lightPreset: 'dusk',
+  //         showPointOfInterestLabels: false
+  //       }
+  //     }
+  //   ],
+  //   sources: {
+  //     gibs: {
+  //       type: 'raster',
+  //       tiles: ['https://gibs-a.earthdata.nasa.gov/' + tilePathPreviousDay, 'https://gibs-b.earthdata.nasa.gov/' + tilePathPreviousDay, 'https://gibs-c.earthdata.nasa.gov/' + tilePathPreviousDay],
+  //       tileSize: 128
+  //     },
+  //     mapbox_streets: {
+  //       type: 'vector',
+  //       url: 'mapbox://mapbox.mapbox-streets-v8' // Mapbox Streets vector tile source
+  //     },
+  //     mapbox_satelitte: {
+  //       type: 'raster',
+  //       url: 'mapbox://styles/mapbox/satellite-v9' // Mapbox Satellite raster tile source
+  //     },
+  //     mapbox_streets_raster: {
+  //       type: 'raster',
+  //       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+  //       tileSize: 256,
+  //       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  //     }
+  //   },
+  //   layers: [
+  //     {
+  //       id: 'gibs',
+  //       type: 'raster',
+  //       source: 'gibs',
+  //       minzoom: 0,
+  //       maxzoom: 6,
+  //       paint: {
+  //         'raster-opacity': 1 // Add this line
+  //       }
+  //     },
+  //     {
+  //       id: 'roads',
+  //       type: 'line',
+  //       source: 'mapbox_streets',
+  //       'source-layer': 'road', // Use the 'road' layer from Mapbox Streets
+  //       paint: {
+  //         'line-color': '#808080', // Set the color of the roads to medium grey
+  //         'line-width': 0.2 // Set the width of the roads
+  //       }
+  //     }
+  //   ]
+  // }
 
-      {
-        id: 'roads',
-        type: 'line',
-        source: 'mapbox_streets',
-        'source-layer': 'road', // Use the 'road' layer from Mapbox Streets
-        paint: {
-          'line-color': '#808080', // Set the color of the roads to medium grey
-          'line-width': 0.2 // Set the width of the roads
-        }
+  // Function to toggle the lighting mode
+  const toggleLightingMode = () => {
+    console.log('Toggling lighting mode')
+
+    setLightingMode(prevMode => {
+      //scroll between prevMode = dawn, noon, dusk, and night
+      console.log('prevMode:', prevMode)
+      switch (prevMode) {
+        case 'dusk':
+          setLightingMode('noon')
+          return
+        case 'noon':
+          setLightingMode('dusk')
+          return
+        default:
+          setLightingMode('noon')
+          return
       }
-    ]
+    })
   }
 
   useEffect(() => {
     mapboxgl.accessToken = mapbox_access_token
 
+    // Get the current map container
+    const currentMap = mapInstance.current
+    //get the current view state
+    let currentState = null
+    if (currentMap) {
+      currentState = {
+        center: currentMap.getCenter(),
+        zoom: currentMap.getZoom(),
+        pitch: currentMap.getPitch(),
+        bearing: currentMap.getBearing()
+      }
+    }
+
     const mymap = new mapboxgl.Map({
       container: mapContainer.current, // container ID
-      // style: 'mapbox://styles/mapbox/streets-v11', // style URL
-
-      // container: mapContainer.current,
-
-      style: style3, // Use Mapbox's satellite imagery
+      // style: style3, // Use Mapbox's satellite imagery
+      //The style object is the most important part of the map configuration
+      style: {
+        version: 8,
+        imports: [
+          {
+            id: 'basemap',
+            url: 'mapbox://styles/mapbox/standard',
+            //add configuration options
+            config: {
+              lightPreset: lightingMode,
+              showPointOfInterestLabels: false
+            }
+          }
+        ],
+        sources: {
+          gibs: {
+            type: 'raster',
+            tiles: ['https://gibs-a.earthdata.nasa.gov/' + tilePathPreviousDay, 'https://gibs-b.earthdata.nasa.gov/' + tilePathPreviousDay, 'https://gibs-c.earthdata.nasa.gov/' + tilePathPreviousDay],
+            tileSize: 128
+          },
+          mapbox_streets: {
+            type: 'vector',
+            url: 'mapbox://mapbox.mapbox-streets-v8' // Mapbox Streets vector tile source
+          },
+          mapbox_satelitte: {
+            type: 'raster',
+            url: 'mapbox://styles/mapbox/satellite-v9' // Mapbox Satellite raster tile source
+          },
+          mapbox_streets_raster: {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          }
+        },
+        layers: [
+          {
+            id: 'gibs',
+            type: 'raster',
+            source: 'gibs',
+            minzoom: 0,
+            maxzoom: 8,
+            paint: {
+              'raster-opacity': 1 // Add this line
+            }
+          },
+          {
+            id: 'roads',
+            type: 'line',
+            source: 'mapbox_streets',
+            'source-layer': 'road', // Use the 'road' layer from Mapbox Streets
+            paint: {
+              'line-color': '#808080', // Set the color of the roads to medium grey
+              'line-width': 0.2 // Set the width of the roads
+            }
+          }
+        ]
+      },
       glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf', // add this line
       center: [140, -33], // starting position [lng, lat]
       zoom: 4, // starting zoom
       projection: 'globe',
       antialias: true,
       backgroundColor: 'transparent' // set background color to transparent
-
-      // style: {
-      //   version: 8,
-      //   sources: {
-      //     streets: {
-      //       type: 'raster',
-      //       tiles: 'mapbox://styles/mapbox/streets-v11'
-      //     }
-      //   },
-      //   layers: [],
-      // },
-
-      // style: 'mapbox://styles/mapbox/satellite-v9', // Use Mapbox's satellite imagery
     })
+
+    // //change the style.imports.config.lightPreset to mapboxLightStyle
+    // const currentLightPreset = mymap.getStyle().imports[0].config.lightPreset
+    // console.log('currentLightPreset:', currentLightPreset)
+    // console.log('mapboxLightStyle:', mapboxLightStyle)
+    // mymap.setStyle({
+    //   ...mymap.getStyle(),
+    //   imports: [
+    //     {
+    //       ...mymap.getStyle().imports[0],
+    //       config: {
+    //         ...mymap.getStyle().imports[0].config,
+    //         lightPreset: mapboxLightStyle
+    //       }
+    //     }
+    //   ]
+    // })
 
     mymap.on('load', () => {
       //add the countries to the map
@@ -253,6 +327,7 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
       //add the geojson labels to the map
       addGeoJsonLabels(mymap, 'city-labels', citiesGeoJson)
     })
+
     // mymap.addSource('countries', {
     //   type: 'vector',
     //   url: 'mapbox://mapbox.country-boundaries-v1'
@@ -322,9 +397,19 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
       mymap.getCanvas().style.cursor = ''
     })
 
+    //Restore the view state after the lighting style has loaded
+    mymap.on('style.load', () => {
+      mymap.flyTo({
+        center: currentState.center,
+        zoom: currentState.zoom,
+        pitch: currentState.pitch,
+        bearing: currentState.bearing
+      })
+    })
+
     mapInstance.current = mymap
     return () => mymap.remove()
-  }, [])
+  }, [lightingMode])
 
   useEffect(() => {
     // Check if mapInstance.current is defined and has an 'on' method
@@ -346,7 +431,7 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
         }
       }
     }
-  }, [])
+  }, [lightingMode])
 
   const defaultView = {
     center: [150, -20],
@@ -361,9 +446,12 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
 
   return (
     <div className="flex flex-col justify-center">
-      <div ref={mapContainer} className="h-full min-h-[420px] rounded-lg ">
+      <div ref={mapContainer} className="h-full min-h-[450px] sm:min-h-[800px] rounded-lg ">
         <img src="/images/north-toggle.png" alt="North sign" style={{ zIndex: 1000, width: '35px', height: '35px' }} className="h-full absolute left-0 top-0 transform translate-x-4 translate-y-4 hover:opacity-75 cursor-pointer" onClick={() => flyToDefault()} />
       </div>
+      <button onClick={toggleLightingMode} className="hover:font-bold">
+        Toggle Lighting Mode
+      </button>
       {selectedCity ? <ChartGroup className="h-full min-h-[768px]" weather={allWeatherData[selectedCity]} /> : <p>Click on a city to see the recent weather ..</p>}
     </div>
   )

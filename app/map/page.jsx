@@ -1,5 +1,6 @@
 //a component that fetches data for the map page
 import { revalidatePath } from 'next/cache'
+
 import citiesGeoJson from '@/lib/citiesGeoJson.js'
 import MyMap from '@/components/MyMap'
 import { fetchWeather } from '@/lib/fetchWeather.js'
@@ -8,10 +9,13 @@ import { fetchWeather } from '@/lib/fetchWeather.js'
 import { config } from 'dotenv'
 config()
 
+export const maxDuration = 30 // This function can run for a maximum of 30 seconds on Vercel hosting
+export const dynamic = 'force-dynamic'
+
 const mapbox_access_token = process.env.MAPBOX_API_KEY
 
 export default async function MapPage() {
-  revalidatePath('/map') //revalidate the page every time it is visited
+  // revalidatePath('/map') //revalidate the page every time it is visited
 
   //fetch weather data for all cities via async iterator
   const weatherData = {}
