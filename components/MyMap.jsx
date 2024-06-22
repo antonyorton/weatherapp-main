@@ -130,13 +130,24 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
   //get the tilepaths for the current and previous day
   const { tilePath, tilePathPreviousDay } = getGibsTilePaths()
 
-  const style1 = 'mapbox://styles/mapbox/satellite-v9' // Use Mapbox's satellite imagery
+  const style1 = 'mapbox://styles/mapbox/standard' // Use Mapbox's standard imagery
 
   const style2 = 'mapbox://styles/mapbox/streets-v11' // Use Mapbox's satellite imagery
 
   //NASA satellite imagery
   const style3 = {
     version: 8,
+    imports: [
+      {
+        id: 'basemap',
+        url: 'mapbox://styles/mapbox/standard',
+        //add configuration options
+        config: {
+          lightPreset: 'noon',
+          showPointOfInterestLabels: false
+        }
+      }
+    ],
     sources: {
       gibs: {
         type: 'raster',
@@ -150,25 +161,44 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
       mapbox_satelitte: {
         type: 'raster',
         url: 'mapbox://styles/mapbox/satellite-v9' // Mapbox Satellite raster tile source
+      },
+      mapbox_streets_raster: {
+        type: 'raster',
+        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+        tileSize: 256,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }
     },
     layers: [
-      {
-        id: 'background',
-        type: 'background',
-        paint: {
-          'background-color': 'grey'
-        }
-      },
+      // {
+      //   id: 'background',
+      //   type: 'background',
+      //   paint: {
+      //     'background-color': 'grey',
+      //     'raster-opacity': 0.5
+      //   }
+      // },
+      // {
+      //   id: 'mapbox_streets_raster',
+      //   type: 'raster',
+      //   source: 'mapbox_streets_raster',
+      //   minzoom: 5,
+      //   maxzoom: 20,
+      //   paint: {
+      //     'raster-opacity': 1 // Add this line
+      //   }
+      // },
       {
         id: 'gibs',
         type: 'raster',
         source: 'gibs',
         minzoom: 0,
+        maxzoom: 6,
         paint: {
           'raster-opacity': 1 // Add this line
         }
       },
+
       {
         id: 'roads',
         type: 'line',
@@ -176,7 +206,7 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
         'source-layer': 'road', // Use the 'road' layer from Mapbox Streets
         paint: {
           'line-color': '#808080', // Set the color of the roads to medium grey
-          'line-width': 0.3 // Set the width of the roads
+          'line-width': 0.2 // Set the width of the roads
         }
       }
     ]
@@ -195,7 +225,6 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
       glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf', // add this line
       center: [140, -33], // starting position [lng, lat]
       zoom: 4, // starting zoom
-      maxZoom: 25,
       projection: 'globe',
       antialias: true,
       backgroundColor: 'transparent' // set background color to transparent
@@ -331,8 +360,8 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
   }
 
   return (
-    <div>
-      <div ref={mapContainer} className="h-full min-h-96 rounded-lg ">
+    <div className="flex flex-col justify-center">
+      <div ref={mapContainer} className="h-full min-h-[420px] rounded-lg ">
         <img src="/images/north-toggle.png" alt="North sign" style={{ zIndex: 1000, width: '35px', height: '35px' }} className="h-full absolute left-0 top-0 transform translate-x-4 translate-y-4 hover:opacity-75 cursor-pointer" onClick={() => flyToDefault()} />
       </div>
       {selectedCity ? <ChartGroup className="h-full min-h-[768px]" weather={allWeatherData[selectedCity]} /> : <p>Click on a city to see the recent weather ..</p>}

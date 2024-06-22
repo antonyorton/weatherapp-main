@@ -1,7 +1,7 @@
 //a component that fetches data for the map page
+import { revalidatePath } from 'next/cache'
 import citiesGeoJson from '@/lib/citiesGeoJson.js'
 import MyMap from '@/components/MyMap'
-
 import { fetchWeather } from '@/lib/fetchWeather.js'
 
 //import and configure dotenv
@@ -11,6 +11,8 @@ config()
 const mapbox_access_token = process.env.MAPBOX_API_KEY
 
 export default async function MapPage() {
+  revalidatePath('/map') //revalidate the page every time it is visited
+
   //fetch weather data for all cities via async iterator
   const weatherData = {}
   for await (const city of citiesGeoJson.features) {
@@ -20,10 +22,8 @@ export default async function MapPage() {
   }
 
   return (
-    <div className="bg-slate-200 text-justify rounded-xl">
-      <div className="bg-slate-100 rounded">
-        <MyMap citiesGeoJson={citiesGeoJson} allWeatherData={weatherData} mapbox_access_token={mapbox_access_token} className="rounded-lg" />
-      </div>
+    <div className="bg-slate-100 text-justify rounded-xl flex flex-col justify-center">
+      <MyMap citiesGeoJson={citiesGeoJson} allWeatherData={weatherData} mapbox_access_token={mapbox_access_token} className="rounded-lg" />
     </div>
   )
 }

@@ -28,27 +28,20 @@ export default function ChartGroup({ weather }) {
   // const weather = await fetchWeather(city)
 
   return (
-    <div className="bg-white-500 text-justify mx-1 w-full">
-      <span className="flex flex-row justify-center text-slate-600 my-2">
-        <h1 className="flex text-m font-bold px-1">{`${cityData.name}, ${cityData.country}`}</h1>
-        <h2 className="py-0">{`${localTime} (local time)`}</h2>
+    <div className="bg-white-500 text-justify max-w-[1000px]">
+      <span className="flex flex-row justify-center text-slate-600 mt-7">
+        <h1 className="flex text-m font-bold py-3">{`${cityData.name}, ${cityData.country}`}</h1>
+        <h2 className="p-3">{` ${localTime} (local time)`}</h2>
       </span>
 
-      <div className="flex flex-col justify-center">
-        {/* <h2 className="px-4">Temperature</h2> */}
-        <div className="flex-1">
-          <Chart data={weather} weatherVariable="temp_c" num_days="7" />
-        </div>
-        <div className="flex-1">
-          {/* <h2 className="py-1 px-4">Humidity</h2> */}
-          <Chart data={weather} weatherVariable="humidity" num_days="7" />
-        </div>
-        <div className="flex-1">
-          {/* <h2 className="py-1 px-4">Pressure</h2> */}
-          <Chart data={weather} weatherVariable="pressure_mb" num_days="7" />
-        </div>
+      <div className="flex flex-col h-full justify-center p-2 max-w-[1000px]">
+        <h2 className="px-4">Temperature</h2>
+        <Chart data={weather} weatherVariable="temp_c" num_days="7" />
+        <h2 className="py-1 px-4">Humidity</h2>
+        <Chart data={weather} weatherVariable="humidity" num_days="7" />
+        <h2 className="py-1 px-4">Pressure</h2>
+        <Chart data={weather} weatherVariable="pressure_mb" num_days="7" />
       </div>
-      {/* <img src="/images/cumulonibus.jpg" alt="" className="pt-2" /> */}
     </div>
   )
 }
