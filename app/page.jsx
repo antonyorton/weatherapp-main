@@ -8,8 +8,9 @@ export default function HomePage() {
         Go to the map page{' '}
       </Link>
       <p>This is a simple NextJS weather app using WeatherAPI and Mapbox</p>
-      <img src="/images/himawari-latest.jpg" alt="" className="pt-2" />
-
+      <div>
+        <img src="/images/himawari-latest.jpg" alt="" className="pt-2" />
+      </div>
       <div className="flex flex-col">
         <h1 className="text-md mt-5">Credits</h1>
         <span className="text-slate-600 text-sm font-bold">
