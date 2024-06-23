@@ -1,4 +1,6 @@
 //make this landing page automatically take people to the map page
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function HomePage() {
   return (
@@ -8,7 +10,9 @@ export default function HomePage() {
       </a>
       <p>This is a NextJS weather app using WeatherAPI and Mapbox</p>
       <div>
-        <img src="/images/himawari-latest.jpg" alt="" className="pt-2" />
+        <Link href="/images/himawari-latest.jpg">
+          <Image src="/images/himawari-latest.jpg" alt="" width="900" height="900" className="pt-2" />
+        </Link>
       </div>
       <div className="flex flex-col">
         <h1 className="text-md mt-5">Credits</h1>

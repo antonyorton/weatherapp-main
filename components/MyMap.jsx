@@ -1,5 +1,6 @@
 'use client'
 //a component to render a mapboxgl map
+import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import mapboxgl from '!mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -270,13 +271,14 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
             tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
             tileSize: 256,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          },
-          mapbox_dem: {
-            type: 'raster-dem',
-            url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-            tileSize: 512,
-            maxzoom: 14
           }
+          // //mappbox dem for terrain modelling - disabled for now to reduce load time
+          // mapbox_dem: {
+          //   type: 'raster-dem',
+          //   url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+          //   tileSize: 512,
+          //   maxzoom: 14
+          // }
         },
         layers: [
           {
@@ -301,30 +303,13 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
           }
         ]
       },
-      glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf', // add this line
+      glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf', // required for rendering text labels
       center: [140, -33], // starting position [lng, lat]
       zoom: 4, // starting zoom
       projection: 'globe',
       antialias: true,
       backgroundColor: 'transparent' // set background color to transparent
     })
-
-    // //change the style.imports.config.lightPreset to mapboxLightStyle
-    // const currentLightPreset = mymap.getStyle().imports[0].config.lightPreset
-    // console.log('currentLightPreset:', currentLightPreset)
-    // console.log('mapboxLightStyle:', mapboxLightStyle)
-    // mymap.setStyle({
-    //   ...mymap.getStyle(),
-    //   imports: [
-    //     {
-    //       ...mymap.getStyle().imports[0],
-    //       config: {
-    //         ...mymap.getStyle().imports[0].config,
-    //         lightPreset: mapboxLightStyle
-    //       }
-    //     }
-    //   ]
-    // })
 
     mymap.on('load', () => {
       //add the countries to the map
@@ -406,9 +391,10 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
       mymap.getCanvas().style.cursor = ''
     })
 
-    //Restore the view state after the lighting style has loaded
+    //Restore the view state after the toggled lighting style has loaded
     mymap.on('style.load', () => {
-      mymap.setTerrain({ source: 'mapbox_dem', exaggeration: 2 })
+      // // add terrain data to the map - disabled for now to reduce load time
+      // mymap.setTerrain({ source: 'mapbox_dem', exaggeration: 2 })
 
       mymap.flyTo({
         center: currentState.center,
@@ -422,6 +408,7 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
     return () => mymap.remove()
   }, [lightingMode])
 
+  //useEffect to add a click event to the cities layer to show the weather data
   useEffect(() => {
     // Check if mapInstance.current is defined and has an 'on' method
     if (mapInstance.current && typeof mapInstance.current.on === 'function') {
@@ -458,7 +445,7 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
   return (
     <div className="flex flex-col justify-center">
       <div ref={mapContainer} className="h-full min-h-[450px] sm:min-h-[800px] rounded-lg ">
-        <img src="/images/north-toggle.png" alt="North sign" style={{ zIndex: 1000, width: '35px', height: '35px' }} className="h-full absolute left-0 top-0 transform translate-x-4 translate-y-4 hover:opacity-75 cursor-pointer" onClick={() => flyToDefault()} />
+        <Image src="/images/north-toggle.png" alt="North sign" width="35" height="35" style={{ zIndex: 1000 }} className="absolute left-0 top-0 transform translate-x-4 translate-y-4 hover:opacity-75 cursor-pointer" onClick={() => flyToDefault()} />
       </div>
       <button onClick={toggleLightingMode} className="hover:font-bold">
         Toggle Lighting Mode
