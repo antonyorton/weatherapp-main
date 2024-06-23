@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import citiesGeoJson from '@/lib/citiesGeoJson.js'
 import MyMap from '@/components/MyMap'
 import { fetchWeather } from '@/lib/fetchWeather.js'
-
+import Link from 'next/link'
 //import and configure dotenv
 import { config } from 'dotenv'
 config()
@@ -26,8 +26,13 @@ export default async function MapPage() {
   }
 
   return (
-    <div className="bg-slate-100 text-justify rounded-xl flex flex-col justify-center">
-      <MyMap citiesGeoJson={citiesGeoJson} allWeatherData={weatherData} mapbox_access_token={mapbox_access_token} className="rounded-lg" />
+    <div>
+      <Link href="/" className="text-blue-500 font-bold p-3 hover:underline">
+        Home
+      </Link>
+      <div className="bg-slate-100 text-justify rounded-xl flex flex-col justify-center">
+        <MyMap citiesGeoJson={citiesGeoJson} allWeatherData={weatherData} mapbox_access_token={mapbox_access_token} className="rounded-lg" />
+      </div>
     </div>
   )
 }

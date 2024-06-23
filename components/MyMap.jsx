@@ -1,6 +1,7 @@
 'use client'
 //a component to render a mapboxgl map
 import Image from 'next/image'
+// import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import mapboxgl from '!mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
