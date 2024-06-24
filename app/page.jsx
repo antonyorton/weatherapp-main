@@ -16,11 +16,11 @@ export default function HomePage() {
       </div>
       <span className="flex flex-col md:flex-row">
         <video width="440" height="315" controls className="p-2">
-          <source src="/videos/fd_cve.mp4#t=0.1" type="video/mp4" className="px-1 rounded" />
+          <source src="/videos/fd.mp4#t=0.1" type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
         <video width="450" height="315" controls className="p-2">
-          <source src="/videos/aus_cve.mp4#t=0.1" type="video/mp4" className="px-1 rounded" />
+          <source src="/videos/aus.mp4#t=0.1" type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
       </span>
