@@ -1,6 +1,11 @@
 //make this landing page automatically take people to the map page
 import Image from 'next/image'
 import Link from 'next/link'
+import { config } from 'dotenv'
+config()
+
+const CLOUDFRONT_URL = process.env.MY_AWS_CLOUDFRONT_URL
+export const dynamic = 'force-dynamic'
 
 export default function HomePage() {
   return (
@@ -10,17 +15,18 @@ export default function HomePage() {
       </a>
       <p>This is a NextJS weather app using WeatherAPI and Mapbox</p>
       <div className="py-2">
-        <Link href="/images/himawari-latest.jpg">
-          <Image src="/images/himawari-latest.jpg" alt="" width="900" height="900" className="rounded" />
+        <Link href={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'}>
+          {/* // <Link href="/images/himawari-latest.jpg"> */}
+          <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="900" height="900" className="rounded" />
         </Link>
       </div>
       <span className="flex flex-col md:flex-row">
         <video width="440" height="315" controls className="p-2">
-          <source src="/videos/fd.mp4#t=0.1" type="video/mp4" className="px-1 rounded" />
+          <source src={CLOUDFRONT_URL + 'satellite/public-videos/fd__snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
-        <video width="450" height="315" controls className="p-2">
-          <source src="/videos/aus.mp4#t=0.1" type="video/mp4" className="px-1 rounded" />
+        <video width="480" height="350" controls className="p-2">
+          <source src={CLOUDFRONT_URL + 'satellite/public-videos/au_snd.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
       </span>
