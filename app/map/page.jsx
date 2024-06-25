@@ -10,7 +10,8 @@ import { config } from 'dotenv'
 config()
 
 export const maxDuration = 30 // This function can run for a maximum of 30 seconds on Vercel hosting
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic' // force dynamic rendering on Vercel hosting
+export const revalidate = 3600 // revalidate the page every hour
 
 const mapbox_access_token = process.env.MAPBOX_API_KEY
 
