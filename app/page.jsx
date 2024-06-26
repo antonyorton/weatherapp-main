@@ -5,7 +5,7 @@ import { config } from 'dotenv'
 config()
 
 const CLOUDFRONT_URL = process.env.MY_AWS_CLOUDFRONT_URL
-export const revalidate = 3600 // revalidate the page every hour
+export const revalidate = 6 * 60 * 60 // revalidate the page every six hours
 
 export default function HomePage() {
   return (
@@ -26,7 +26,7 @@ export default function HomePage() {
           Your browser does not support the video tag.
         </video>
         <video width="480" height="350" controls className="p-2">
-          <source src={CLOUDFRONT_URL + 'satellite/public-videos/au_snd.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
+          <source src={CLOUDFRONT_URL + 'satellite/public-videos/aus_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
       </span>
@@ -51,7 +51,6 @@ export default function HomePage() {
             https://www.weatherapi.com/
           </a>
         </span>
-        <br />
         <span className="text-slate-600 text-sm font-bold">
           Mapbox:{' '}
           <a href="https://www.mapbox.com/blog/streamline-map-development-mapbox-basemap/" className="text-blue-600 hover:underline font-normal">
