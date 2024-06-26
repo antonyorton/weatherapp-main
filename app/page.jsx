@@ -5,7 +5,7 @@ import { config } from 'dotenv'
 config()
 
 const CLOUDFRONT_URL = process.env.MY_AWS_CLOUDFRONT_URL
-export const revalidate = 6 * 60 * 60 // revalidate the page every six hours
+export const revalidate = 8 * 60 * 60 // revalidate the page every eight hours
 
 export default function HomePage() {
   return (
