@@ -11,7 +11,8 @@ config()
 
 export const maxDuration = 30 // This function can run for a maximum of 30 seconds on Vercel hosting
 // export const dynamic = 'force-dynamic' // force dynamic rendering on Vercel hosting
-export const revalidate = 4 * 60 * 60 // revalidate the page every hour
+// export const revalidate = 4 * 60 * 60 // revalidate the page every four hours
+export const fetchCache = 'force-no-store' // don't cache the page since it quickly goes beyond vercel hobby plan limits
 
 const mapbox_access_token = process.env.MAPBOX_API_KEY
 
