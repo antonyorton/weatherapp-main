@@ -7,8 +7,9 @@ import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('@/components/Chart.jsx'), { ssr: false })
 
 //other non-dynamic imports
-import { fetchWeather, getSlugs, getCityData } from '@/lib/fetchWeather.js'
+import { fetchWeather, getSlugs } from '@/lib/fetchWeather.js'
 import getLocalTime from '@/lib/getLocalTime'
+import { getCityData } from '@/lib/getCityData'
 import urlSlugToCity from '@/lib/urlSlugToCity.js'
 
 // export async function generateStaticParams() {
@@ -18,14 +19,11 @@ import urlSlugToCity from '@/lib/urlSlugToCity.js'
 
 export default function ChartGroup({ weather }) {
   const mycity = weather[0].city
-  console.log('[ChartGroup] mycity:', mycity)
+
   //get city details
   const cityData = getCityData(mycity)
   //get local time of the city
   const localTime = getLocalTime(cityData.lat, cityData.lon)
-
-  //fetching data from AWS cloudfront
-  // const weather = await fetchWeather(city)
 
   return (
     <div className="bg-white-500 text-justify max-w-[1000px]">

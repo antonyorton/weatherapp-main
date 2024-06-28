@@ -1,6 +1,7 @@
 node_modules/
 example_weather_data/
 test_working/
+backups/
 .env*
 lib/prepare_cities_data/
 lib/test_scripts_only/

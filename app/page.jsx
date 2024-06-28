@@ -6,7 +6,7 @@ config()
 
 const CLOUDFRONT_URL = process.env.MY_AWS_CLOUDFRONT_URL
 // export const revalidate = 8 * 60 * 60 // revalidate the page every eight hours
-export const fetchCache = 'force-no-store' // don't cache the page since it quickly goes beyond vercel hobby plan limits
+export const fetchCache = 'force-no-store' // don't cache the home page since it quickly goes beyond vercel hobby plan limits
 
 export default function HomePage() {
   return (

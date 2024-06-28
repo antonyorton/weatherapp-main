@@ -1,10 +1,13 @@
 'use client'
 //a component to render a mapboxgl map
 import Image from 'next/image'
-// import Link from 'next/link'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import mapboxgl from '!mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { fetchWeather } from '@/lib/fetchWeather'
 
 // import './mymap_styles.css' //styling for the popups (TODO: try to move to tailwind)
 import ChartGroup from './ChartGroup'
@@ -125,6 +128,7 @@ function addGeoJsonLabels(map, id, sourceData) {
 }
 
 export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_token, className }) {
+  const router = useRouter()
   const mapContainer = useRef(null)
   const mapInstance = useRef(null)
   const [selectedCity, setSelectedCity] = useState(null)
@@ -417,6 +421,7 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
       mapInstance.current.on('click', 'cities', function (e) {
         // Prevent the default link click action
         e.preventDefault()
+
         // Get the city name from the clicked feature
         const cityName = e.features[0].properties.name
         // Update the selected city state
@@ -445,13 +450,14 @@ export default function MyMap({ citiesGeoJson, allWeatherData, mapbox_access_tok
 
   return (
     <div className="flex flex-col justify-center">
-      <div ref={mapContainer} className="h-full min-h-[450px] sm:min-h-[800px] rounded-lg ">
+      <div ref={mapContainer} className="h-full min-h-[450px] sm:min-h-[620px] rounded-lg ">
         <Image src="/images/north-toggle.png" alt="North sign" width="35" height="35" style={{ zIndex: 1000 }} className="absolute left-0 top-0 transform translate-x-4 translate-y-4 hover:opacity-75 cursor-pointer" onClick={() => flyToDefault()} />
       </div>
       <button onClick={toggleLightingMode} className="hover:font-bold">
         Toggle Lighting Mode
       </button>
-      {selectedCity ? <ChartGroup className="h-full min-h-[768px]" weather={allWeatherData[selectedCity]} /> : <p>Click on a city to see the recent weather ..</p>}
+      {/* {selectedCity ? <ChartGroup className="h-full min-h-[768px]" weather={allWeatherData[selectedCity]} /> : <p>Click on a city to see the recent weather ..</p>} */}
+      {selectedCity ? <ChartGroup city={selectedCity} /> : <p>Click on a city to see the recent weather ..</p>}
     </div>
   )
 }
