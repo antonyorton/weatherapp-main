@@ -18,12 +18,20 @@ export default function HomePage() {
       <div className="py-2">
         <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="900" height="900" className="rounded" />
       </div>
-      <span className="flex flex-col md:flex-row">
+      <div className="flex flex-col">
         <video width="900" height="350" controls className="rounded">
           <source src={CLOUDFRONT_URL + 'satellite/public-videos/aus_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
-      </span>
+        <video width="1500" controls className="py-1 rounded">
+          <source src={CLOUDFRONT_URL + 'satellite/public-videos/pi3_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
+          Your browser does not support the video tag.
+        </video>
+        <video width="900" height="350" controls className="rounded">
+          <source src={CLOUDFRONT_URL + 'satellite/public-videos/jpn_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
       <div className="flex flex-col">
         <h1 className="text-md mt-5">Credits</h1>
