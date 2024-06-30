@@ -22,11 +22,7 @@ export default function HomePage() {
         </Link>
       </div>
       <span className="flex flex-col md:flex-row">
-        <video width="440" height="315" controls className="p-2">
-          <source src={CLOUDFRONT_URL + 'satellite/public-videos/fd__snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
-          Your browser does not support the video tag.
-        </video>
-        <video width="480" height="350" controls className="p-2">
+        <video width="900" height="350" controls className="rounded">
           <source src={CLOUDFRONT_URL + 'satellite/public-videos/aus_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
