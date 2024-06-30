@@ -16,10 +16,7 @@ export default function HomePage() {
       </a>
       <p>This is a NextJS weather app using WeatherAPI and Mapbox</p>
       <div className="py-2">
-        <Link href={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'}>
-          {/* // <Link href="/images/himawari-latest.jpg"> */}
-          <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="900" height="900" className="rounded" />
-        </Link>
+        <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="900" height="900" className="rounded" />
       </div>
       <span className="flex flex-col md:flex-row">
         <video width="900" height="350" controls className="rounded">
