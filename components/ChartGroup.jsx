@@ -7,15 +7,15 @@ import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('@/components/Chart.jsx'), { ssr: false })
 
 //other non-dynamic imports
-import { fetchWeather, getSlugs } from '@/lib/fetchWeather.js'
 import getLocalTime from '@/lib/getLocalTime'
 import { getCityData } from '@/lib/getCityData'
-import urlSlugToCity from '@/lib/urlSlugToCity.js'
 
 // export async function generateStaticParams() {
 //   const slugs = await getSlugs()
 //   return slugs.map(item => ({ slug: item }))
 // }
+
+export const revalidate = 3600
 
 export default function ChartGroup({ weather }) {
   const mycity = weather[0].city

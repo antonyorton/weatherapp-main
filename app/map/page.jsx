@@ -10,7 +10,8 @@ config()
 
 const mapbox_access_token = process.env.MAPBOX_API_KEY
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default async function Page() {
   return (
