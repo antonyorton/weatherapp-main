@@ -16,19 +16,19 @@ export default function HomePage() {
       </a>
       <p>This is a NextJS weather app using WeatherAPI and Mapbox</p>
       <div className="py-2">
-        <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="900" height="900" className="rounded" />
+        <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="1800" height="1800" className="rounded" />
       </div>
       <div className="flex flex-col">
-        <video width="900" height="350" controls className="rounded">
+        <video width="900" controls className="py-2 rounded">
           <source src={CLOUDFRONT_URL + 'satellite/public-videos/aus_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
-        <video width="1500" controls className="py-1 rounded">
-          <source src={CLOUDFRONT_URL + 'satellite/public-videos/pi3_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
+        <video width="900" controls className="py-2 rounded">
+          <source src={CLOUDFRONT_URL + 'satellite/public-videos/pia_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
-        <video width="900" height="350" controls className="rounded">
-          <source src={CLOUDFRONT_URL + 'satellite/public-videos/jpn_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
+        <video width="900" controls className="rounded">
+          <source src={CLOUDFRONT_URL + 'satellite/public-videos/se1_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
       </div>
