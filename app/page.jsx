@@ -14,9 +14,13 @@ export default function HomePage() {
       <a href="/map" className="text-blue-500 font-bold">
         Go to the map page{' '}
       </a>
-      <p>This is a NextJS weather app using WeatherAPI and Mapbox</p>
+      <p>This is a NextJS weather app using WeatherAPI and Mapbox.</p>
+      <p>Imagery, videos and weather data are live and updated hourly.</p>
+      <p>Satellite imagery is from the Japan Meteorological Agency.</p>
       <div className="py-2">
-        <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="1800" height="1800" className="rounded" />
+        <Link href={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'}>
+          <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="1800" height="1800" className="rounded" />
+        </Link>
       </div>
       <div className="flex flex-col">
         <video width="900" controls className="py-2 rounded">
