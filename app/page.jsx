@@ -18,9 +18,10 @@ export default function HomePage() {
       <p>Imagery, videos and weather data are live and updated hourly.</p>
       <p>Satellite imagery is from the Japan Meteorological Agency.</p>
       <div className="py-2">
-        <Link href={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'}>
+        <p>Note: Full disk image no longer visible. Himawari 8 link appears to be down since 23 August 2024. This may be repaired in future.</p>
+        {/* <Link href={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'}>
           <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="1800" height="1800" className="rounded" />
-        </Link>
+        </Link> */}
       </div>
       <div className="flex flex-col">
         <video width="900" controls className="py-2 rounded">
