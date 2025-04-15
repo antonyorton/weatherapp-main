@@ -20,28 +20,28 @@ export default function HomePage() {
       <div className="py-2">
         {/* <p>Note: Full disk image no longer visible. Himawari 8 link appears to be down since 23 August 2024. This may be repaired in future.</p> */}
         <Link href={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'}>
-          <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="1800" height="1800" className="rounded" />
+          <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="650" height="650" className="rounded" />
         </Link>
       </div>
       <div className="flex flex-col">
         <p className="text-lg text-bold font-bold mt-5">Australia</p>
-        <video width="900" controls className="py-2 rounded">
+        <video width="650" controls className="py-2 rounded">
           <source src={CLOUDFRONT_URL + 'satellite/public-videos/aus_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
         <p className="text-lg text-bold font-bold mt-5">Papua New Guinea</p>
-        <video width="900" controls className="py-2 rounded">
+        <video width="650" controls className="py-2 rounded">
           <source src={CLOUDFRONT_URL + 'satellite/public-videos/pia_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
         <p className="text-lg text-bold font-bold mt-5">Indian Ocean</p>
-        <video width="900" controls className="rounded">
+        <video width="650" controls className="rounded">
           <source src={CLOUDFRONT_URL + 'satellite/public-videos/se1_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
         <p className="text-lg text-bold font-bold mt-5">JMA Target Area Observation (if available)</p>
         <img width="200" height="300" src="https://www.data.jma.go.jp/mscweb/data/himawari/img/fd_/fd__dsk_0000.jpg" alt="location of detailed view" />
-        <video width="900" controls className="rounded">
+        <video width="650" controls className="rounded">
           <source src={CLOUDFRONT_URL + 'satellite/public-videos/tga_snd_.mp4#t=0.1'} type="video/mp4" className="px-1 rounded" />
           Your browser does not support the video tag.
         </video>
