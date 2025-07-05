@@ -31,43 +31,42 @@ export default function HomePage() {
           <Image src={CLOUDFRONT_URL + 'satellite/public-hi-res-images/himawari.jpg'} alt="" width="650" height="650" className="rounded" />
         </Link> */}
 
-        <h3 className="font-bold  text-blue-400 mb-2 mt-5">
-          {'Visible satellite over southern Australia and NZ on ' + local_time}
+        <h3 className="font-bold  text-blue-400 mt-5">
+          {'Visible satellite over southern Australia and NZ on ' +
+            local_time.toUTCString()}
         </h3>
-        <div className="flex flex-row gap-3">
-          <img
-            src={
+        <p className="text-blue-400 mb-3">(Click to view image)</p>
+        <div className="flex flex-row gap-10">
+          <Link
+            className=" text-red-500 font-bold hover:text-red-200"
+            href={
               'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
               himawari_date +
               '_3_6.png'
             }
-            alt=""
-            width="375"
-            // height="650"
-            className="rounded"
-          />
-          <img
-            src={
+          >
+            Adelaide
+          </Link>
+          <Link
+            className=" text-red-500 font-bold hover:text-red-200"
+            href={
               'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
               himawari_date +
               '_4_6.png'
             }
-            alt=""
-            width="375"
-            // height="650"
-            className="rounded"
-          />
-          <img
-            src={
+          >
+            Sydney
+          </Link>
+          <Link
+            className=" text-red-500 font-bold hover:text-red-200"
+            href={
               'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
               himawari_date +
               '_5_6.png'
             }
-            alt=""
-            width="375"
-            // height="650"
-            className="rounded"
-          />
+          >
+            Tasman Sea
+          </Link>
         </div>
       </div>
       <div className="flex flex-col">
