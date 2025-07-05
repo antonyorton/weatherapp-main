@@ -42,12 +42,10 @@ export default function HomePage() {
         </h3>
         <p className="text-blue-400 mb-3">(Click to view image)</p>
         <div className="flex flex-row gap-10">
-          <a
+          <img
             className=" text-red-500 font-bold hover:text-red-200"
-            href="https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/2025/07/05/043000_3_6.png"
-          >
-            Adelaide
-          </a>
+            src="https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/2025/07/05/043000_3_6.png"
+          ></img>
           <a
             className=" text-red-500 font-bold hover:text-red-200"
             href={
