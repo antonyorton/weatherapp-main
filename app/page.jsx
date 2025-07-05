@@ -44,7 +44,7 @@ export default function HomePage() {
         <div className="flex flex-row gap-10">
           <a
             className=" text-red-500 font-bold hover:text-red-200"
-            href={adelaide_link}
+            href="https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/2025/07/05/043000_3_6.png"
           >
             Adelaide
           </a>
