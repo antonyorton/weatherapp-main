@@ -40,32 +40,23 @@ export default function HomePage() {
           {'Visible satellite over southern Australia and NZ on ' +
             local_time.toUTCString()}
         </h3>
-        <p className="text-blue-400 mb-3">(Click to view image)</p>
+        <p className="text-blue-400 mb-3">
+          (At present these images are not live and will be fixed as soon as I
+          can rewrite this app without the annoying NextJS)
+        </p>
         <div className="flex flex-row gap-10">
           <img
             className=" text-red-500 font-bold hover:text-red-200"
             src="https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/2025/07/05/043000_3_6.png"
           ></img>
-          <a
+          <img
             className=" text-red-500 font-bold hover:text-red-200"
-            href={
-              'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
-              himawari_date +
-              '_4_6.png'
-            }
-          >
-            Sydney
-          </a>
-          <a
+            src="https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/2025/07/05/043000_4_6.png"
+          ></img>
+          <img
             className=" text-red-500 font-bold hover:text-red-200"
-            href={
-              'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
-              himawari_date +
-              '_5_6.png'
-            }
-          >
-            Tasman Sea
-          </a>
+            src="https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/2025/07/05/043000_5_6.png"
+          ></img>
         </div>
       </div>
       <div className="flex flex-col">
