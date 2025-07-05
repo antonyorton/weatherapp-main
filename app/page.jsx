@@ -15,7 +15,11 @@ export default function HomePage() {
   const himawari_date = get_himawari_date({ hrs_to_subtract: hrs_to_subtract })
   const local_time = new Date()
   local_time.setHours(local_time.getHours() - hrs_to_subtract)
-  console.log(himawari_date)
+  // console.log(himawari_date)
+  const adelaide_link =
+    'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
+    himawari_date +
+    '_3_6.png'
 
   return (
     <>
@@ -40,11 +44,7 @@ export default function HomePage() {
         <div className="flex flex-row gap-10">
           <a
             className=" text-red-500 font-bold hover:text-red-200"
-            href={
-              'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
-              himawari_date +
-              '_3_6.png'
-            }
+            href={adelaide_link}
           >
             Adelaide
           </a>
