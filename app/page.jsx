@@ -15,6 +15,7 @@ export default function HomePage() {
   const himawari_date = get_himawari_date({ hrs_to_subtract: hrs_to_subtract })
   const local_time = new Date()
   local_time.setHours(local_time.getHours() - hrs_to_subtract)
+  console.log(himawari_date)
 
   return (
     <>
