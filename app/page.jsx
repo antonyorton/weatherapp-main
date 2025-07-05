@@ -37,7 +37,7 @@ export default function HomePage() {
         </h3>
         <p className="text-blue-400 mb-3">(Click to view image)</p>
         <div className="flex flex-row gap-10">
-          <Link
+          <a
             className=" text-red-500 font-bold hover:text-red-200"
             href={
               'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
@@ -46,8 +46,8 @@ export default function HomePage() {
             }
           >
             Adelaide
-          </Link>
-          <Link
+          </a>
+          <a
             className=" text-red-500 font-bold hover:text-red-200"
             href={
               'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
@@ -56,8 +56,8 @@ export default function HomePage() {
             }
           >
             Sydney
-          </Link>
-          <Link
+          </a>
+          <a
             className=" text-red-500 font-bold hover:text-red-200"
             href={
               'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/8d/550/' +
@@ -66,7 +66,7 @@ export default function HomePage() {
             }
           >
             Tasman Sea
-          </Link>
+          </a>
         </div>
       </div>
       <div className="flex flex-col">
